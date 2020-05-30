@@ -3,6 +3,9 @@ const fs = require('fs');
 const {prefix, token} = require('./config.json');
 const client = new Discord.Client();
 
+const spectreID = "440215348126416897";
+const fiftyID = "199861254641287168";
+
 client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
@@ -17,6 +20,20 @@ client.once('ready', () => {
 });
 
 client.on('message', message => {
+	// "Revenge"
+    if (msg.author.id == spectreID) {
+        var d = Math.random();
+        if (d < 0.05) {
+            msg.react("🍺");
+        }
+    }
+
+    if(msg.author.id == fiftyID){
+        var d = Math.random();
+        if(d < 0.05)
+        msg.react("🐟");
+	}
+	
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
 	const args = message.content.slice(prefix.length).split(/ +/);

@@ -21,17 +21,17 @@ client.once('ready', () => {
 
 client.on('message', message => {
 	// "Revenge"
-    if (msg.author.id == spectreID) {
+    if (message.author.id == spectreID) {
         var d = Math.random();
         if (d < 0.05) {
-            msg.react("🍺");
+            message.react("🍺");
         }
     }
 
-    if(msg.author.id == fiftyID){
+    if(message.author.id == fiftyID){
         var d = Math.random();
         if(d < 0.05)
-        msg.react("🐟");
+        message.react("🐟");
 	}
 	
 	if (!message.content.startsWith(prefix) || message.author.bot) return;

@@ -23,6 +23,10 @@ client.on('message', message => {
 
 	if (!client.commands.has(command)) return;
 
+	if (command.args && !args.length) {
+		return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
+	}
+
 	try {
 		client.commands.get(command).execute(message, args);
 	} catch (error) {

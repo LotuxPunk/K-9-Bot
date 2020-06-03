@@ -5,6 +5,8 @@ const client = new Discord.Client();
 
 const spectreID = "440215348126416897";
 const fiftyID = "199861254641287168";
+const mooseID = "486876514097299461";
+const users = [spectreID, fiftyID, mooseID];
 
 client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -16,22 +18,33 @@ for (const file of commandFiles) {
 
 client.once('ready', () => {
 	console.log(`Logged in as ${client.user.tag}!`);
-    client.user.setActivity('CyberPunk 2077', {type: "PLAYING"});
+	setInterval(function ramShow() {
+		let ram = process.memoryUsage().heapUsed / 1024 / 1024;
+		ram = Math.round(ram)
+    	client.user.setActivity(`with RAM : ${ram} MB`, {type: "PLAYING"});
+	}, 2000);
+	
 });
 
 client.on('message', message => {
 	// "Revenge"
-    if (message.author.id == spectreID) {
-        var d = Math.random();
-        if (d < 0.05) {
-            message.react("🍺");
-        }
-    }
-
-    if(message.author.id == fiftyID){
-        var d = Math.random();
-        if(d < 0.05)
-        message.react("🐟");
+	if(users.includes(message.author.id)){
+		var d = Math.random();
+		if(d < 0.05){
+			switch (message.author.id) {
+				case spectreID:
+					message.react("🍺");
+					break;
+				case fiftyID:
+					message.react("🐟");
+					break;
+				case mooseID:
+					message.react("🎌");
+					break;
+				default:
+					break;
+			}
+		}
 	}
 	
 	if (!message.content.startsWith(prefix) || message.author.bot) return;

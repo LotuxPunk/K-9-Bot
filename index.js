@@ -47,6 +47,9 @@ client.on('message', message => {
 		}
 	}
 	
+	//Hm stuff
+	if (message.content.toLowerCase().startsWith("hm") || message.content.toLowerCase().startsWith("mh")) message.delete();
+
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
 	const args = message.content.slice(prefix.length).split(/ +/);
